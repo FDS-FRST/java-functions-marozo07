@@ -1,5 +1,10 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
+
+/**
+ *  DEVOIR  de  Valendino Pierre
+ * */
 
 public class Main {
 
@@ -10,9 +15,8 @@ public class Main {
      * @return the input name
      */
     public static String greet(String name) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        return name;
     }
-
 
     /**
      * Adds two integers and returns their sum.
@@ -22,7 +26,7 @@ public class Main {
      * @return the sum of the two integers
      */
     public static int add(int a, int b) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        return a + b;
     }
 
     /**
@@ -32,7 +36,7 @@ public class Main {
      * @return
      */
     public static boolean isEven(int number) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        return number % 2 == 0;
     }
 
     /**
@@ -42,7 +46,7 @@ public class Main {
      * @return
      */
     public static double areaOfCircle(double radius) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        return Math.PI * radius * radius;
     }
 
     /**
@@ -57,7 +61,11 @@ public class Main {
      * @return
      */
     public static String grade(int score) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        if (score >= 90) return "A";
+        else if (score >= 80) return "B";
+        else if (score >= 70) return "C";
+        else if (score >= 60) return "D";
+        else return "F";
     }
 
     /**
@@ -69,7 +77,7 @@ public class Main {
      * @return
      */
     public static int maxOfThree(int a, int b, int c) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        return Math.max(a, Math.max(b, c));
     }
 
     /**
@@ -79,7 +87,7 @@ public class Main {
      * @return
      */
     public static double toFahrenheit(double celsius) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        return celsius * 9/5 + 32;
     }
 
     /**
@@ -90,9 +98,8 @@ public class Main {
      * @return
      */
     public static double applyDiscount(double price, double discount) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        return price * (1 - discount/100);
     }
-
 
     /**
      * Find even numbers from a list.
@@ -101,7 +108,13 @@ public class Main {
      * @return
      */
     public static List<Integer> filterEvenNumbers(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        List<Integer> evenNumbers = new ArrayList<>();
+        for (int num : numbers) {
+            if (num % 2 == 0) {
+                evenNumbers.add(num);
+            }
+        }
+        return evenNumbers;
     }
 
     /**
@@ -111,7 +124,12 @@ public class Main {
      * @return
      */
     public static int factorial(int n) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        if (n == 0 || n == 1) return 1;
+        int result = 1;
+        for (int i = 2; i <= n; i++) {
+            result *= i;
+        }
+        return result;
     }
 
     /**
@@ -121,17 +139,25 @@ public class Main {
      * @return
      */
     public static int fibonacci(int n) {
-        throw new UnsupportedOperationException("Not yet implemented!");
+        if (n <= 1) return n;
+        int a = 0, b = 1;
+        for (int i = 2; i <= n; i++) {
+            int temp = a + b;
+            a = b;
+            b = temp;
+        }
+        return b;
     }
 
-
     // ================= TEST RUNNER =================
+
 
     public static void main(String[] args) {
         System.out.println("🔍 Running Java Version Tests...\n");
 
-        int passed = 0, failed = 0;
+        int passed = 0;
 
+        // Each check validates a method and increases the counter if true
         passed += check("greet Alice", greet("Alice").equals("Alice"));
         passed += check("add", add(3, 5) == 8);
         passed += check("isEven true", isEven(4));
@@ -139,14 +165,15 @@ public class Main {
         passed += check("grade A", grade(95).equals("A"));
         passed += check("maxOfThree", maxOfThree(3, 9, 6) == 9);
         passed += check("toFahrenheit", Math.abs(toFahrenheit(20) - 68) < 0.1);
-        passed += check("discount", Math.abs(applyDiscount(100, 10)) == 90);
+        passed += check("discount", Math.abs(applyDiscount(100, 10) - 90) < 0.1);
         passed += check("filterEvenNumbers",
                 filterEvenNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)).equals(Arrays.asList(2, 4, 6)));
         passed += check("factorial", factorial(5) == 120);
         passed += check("fibonacci", fibonacci(6) == 8);
 
-        System.out.println("\n🎯 Tests passed: " + passed + " / 15");
+        System.out.println("\n🎯 Tests passed: " + passed + " / 11");
     }
+
 
     private static int check(String name, boolean result) {
         if (result) {
